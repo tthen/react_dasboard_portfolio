@@ -257,7 +257,7 @@ export default function App() {
 
 Con esta estructura, al pulsar un botón se actualiza `activa`, React vuelve a renderizar los componentes afectados y el dashboard cambia sin recargar la página.
 
-## Puntos a tener en cuenta
+### Puntos a tener en cuenta
 
 - **Los archivos `.jsx` se compilan en el build.** Lo que se publica en `dist/` es JavaScript estándar, así que el usuario final no necesita nada especial.
 - **Mantén el `fetch` del JSON en un solo lugar** (normalmente `App.jsx`) y pasa los datos a los componentes por props. Así los componentes son más fáciles de probar y reutilizar.
@@ -265,6 +265,30 @@ Con esta estructura, al pulsar un botón se actualiza `activa`, React vuelve a r
 - **En GitHub Pages dentro de un subdirectorio**, configura `base` en `vite.config.js`.
 
 ¿Quieres que prepare los componentes para los gráficos con `react-chartjs-2`, o prefieres empezar por la estructura de `datos.json` para ajustar los componentes a tus datos?
+
+## Consulta Claude
+
+El repositorio creado en github.com debe ser publica? o puedes ser privada?
+
+R/
+
+**No necesita ser pública.** Puedes crear un repositorio privado sin problemas para desarrollar el proyecto. La limitación aparece al publicar el sitio: **GitHub Pages desde un repositorio privado requiere un plan de pago** (GitHub Pro, Team o Enterprise). Con una cuenta gratuita, Pages solo funciona con repositorios públicos.
+
+### Opciones según tu caso
+
+| Opción | Repositorio | Coste | Observaciones |
+|---|---|---|---|
+| GitHub Pages gratuito | Público | Gratis | El código y el sitio son visibles para cualquiera. |
+| GitHub Pages con plan de pago | Privado | GitHub Pro o Team | El código queda privado, pero el sitio publicado sigue siendo accesible por URL. |
+| Netlify o Vercel | Privado | Plan gratuito disponible | Se conectan al repositorio privado y despliegan la carpeta `dist/`. Es una alternativa sin pagar GitHub. |
+
+Conviene tener clara una distinción: **que el repositorio sea privado no hace privado el sitio publicado**. Con GitHub Pages, cualquiera con la URL puede ver el `dist/`, incluido el archivo `datos.json`. Si los datos son sensibles, no los publiques en el sitio estático; necesitarías un backend con autenticación.
+
+### Recomendación
+
+Si quieres mantener el código privado sin pagar, crea el repositorio privado en GitHub y conéctalo a **Netlify** o **Vercel**, que ejecutan `npm run build` y publican `dist/` automáticamente en cada cambio. Si el proyecto es un ejemplo o puede ser público, GitHub Pages gratuito es la opción más sencilla.
+
+¿Los datos del JSON son públicos o contienen información que debería quedar restringida?
 
 
 

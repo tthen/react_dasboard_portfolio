@@ -290,6 +290,74 @@ Si quieres mantener el código privado sin pagar, crea el repositorio privado en
 
 ¿Los datos del JSON son públicos o contienen información que debería quedar restringida?
 
+## Pregunta Claude
+
+Como debo configurar o crear el repositorio en Netlify o Vercel para crear mi aplicación y servirla desde estos sitios?
+
+R/
+
+**Lo más sencillo es crear el repositorio privado en GitHub, subir el proyecto y conectarlo a Netlify o Vercel.** Ambas plataformas instalan el proyecto, ejecutan `npm run build` y publican la carpeta `dist/` cada vez que haces un `git push`.
+
+## Configuración en cada plataforma
+
+| Ajuste | Netlify | Vercel |
+|---|---|---|
+| Preset o framework | Detectado automáticamente (Vite) | **Vite** |
+| Build command | `npm run build` | `npm run build` |
+| Publish o Output directory | **`dist`** | **`dist`** |
+| Repositorio privado | Se autoriza la app de Netlify en GitHub | Se autoriza la app de Vercel en GitHub |
+| Plan gratuito | Sí, para proyectos personales | Sí, para proyectos personales (Hobby) |
+
+## Paso 1: Subir el proyecto a GitHub
+
+### Crear el repositorio
+1. En GitHub, pulsa **New repository**.
+2. Elige un nombre, selecciona **Private** y no marques la opción de añadir README ni `.gitignore`, porque el proyecto ya tiene los suyos.
+3. Crea el repositorio.
+
+### Enviar el código
+Desde la carpeta del proyecto:
+
+```bash
+git init
+git add .
+git commit -m "Primera versión del dashboard"
+git branch -M main
+git remote add origin https://github.com/TU_USUARIO/mi-dashboard.git
+git push -u origin main
+```
+
+La plantilla de Vite ya incluye `node_modules` y `dist` en `.gitignore`, así que no se suben. Netlify y Vercel generan `dist/` por su cuenta durante el despliegue.
+
+### Paso 2A: Desplegar en Netlify
+
+1. Entra en **app.netlify.com** y pulsa **Add new project → Import an existing project**.
+2. Elige **GitHub**. La primera vez, Netlify te pedirá autorizar su aplicación en GitHub.
+3. En la configuración de la autorización, selecciona **Only select repositories** y elige `mi-dashboard`. Así Netlify solo accede a ese repositorio privado.
+4. Selecciona el repositorio en Netlify.
+5. Revisa los ajustes: Build command `npm run build` y Publish directory `dist`.
+6. Pulsa **Deploy**.
+
+Netlify te dará una URL del tipo `https://nombre-aleatorio.netlify.app`. Puedes cambiarla en **Site configuration → Change site name**.
+
+### Paso 2B: Desplegar en Vercel
+
+1. Entra en **vercel.com** y pulsa **Add New… → Project**.
+2. Conecta tu cuenta de GitHub y autoriza Vercel. Al igual que en Netlify, puedes limitar el acceso a un repositorio concreto.
+3. Busca `mi-dashboard` en la lista e impórtalo.
+4. Vercel debería detectar **Vite** como framework. Comprueba que el Output Directory sea `dist`.
+5. Pulsa **Deploy**.
+
+Vercel asigna una URL del tipo `https://mi-dashboard.vercel.app`, que también puedes personalizar en la configuración del proyecto.
+
+### Actualizaciones y pruebas
+
+Cada `git push` a la rama `main` genera un nuevo despliegue automático. Netlify y Vercel también crean URLs de vista previa para otras ramas o pull requests, útiles para probar cambios antes de publicarlos.
+
+Antes de desplegar, conviene comprobar que el build funciona en tu máquina con `npm run build` y `npm run preview`. Si la compilación falla en la plataforma, revisa el log de despliegue: suele deberse a una dependencia que falta en `package.json` o a una versión de Node distinta.
+
+¿Quieres que te ayude a revisar el `package.json` antes de subirlo, o prefieres que te prepare un ejemplo de `datos.json` para probar el despliegue?
+
 
 
 

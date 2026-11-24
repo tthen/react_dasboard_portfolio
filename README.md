@@ -143,6 +143,129 @@ cargarDatos();
 
 Para afinar la propuesta, ¿puedes contarme qué tipo de datos contiene el JSON (ventas, métricas, encuestas, etc.) y qué visualizaciones necesitas? Con eso puedo ajustar la estructura del archivo y los gráficos.
 
+## Pregunta a Claude
+
+Deseo utilizar .JSX para la elaboracion de componentes. En la sugerencia me recomienda utilizar JavaScript (o TypeScript) ,  puedo crear los componentes con jsx?
+
+R/
+
+**Sí, puedes crear los componentes con JSX.** JSX no es un lenguaje distinto: es una extensión de sintaxis de JavaScript que permite escribir HTML dentro del código. Como los navegadores no lo entienden directamente, necesita un transpilador, y Vite ya lo incluye. Por eso, en lugar de JavaScript puro, lo más práctico es usar **JSX con React**, un framework que organiza la interfaz en componentes reutilizables.
+
+## Stack actualizado con JSX
+
+| Capa | Tecnología | Motivo |
+|---|---|---|
+| Build | **Vite** | Procesa los archivos `.jsx`, genera `dist/` y copia `public/data/datos.json`. |
+| Componentes | **React** con archivos **`.jsx`** | Cada parte del dashboard (botones, tarjetas, gráfico) es un componente con su propio archivo. |
+| Lenguaje | **JavaScript** o **TypeScript** (`.tsx`) | JSX funciona con ambos. Con TypeScript, los componentes se escriben en `.tsx`. |
+| Estado | **useState** y **useEffect** de React | Controlan la sección activa y la carga del JSON sin librerías adicionales. |
+| Gráficos | **react-chartjs-2** (sobre Chart.js) | Envuelve Chart.js en componentes React, por ejemplo `<Bar />` o `<Line />`. |
+| Estilos | CSS o **Tailwind CSS** | Ambos funcionan con componentes JSX. |
+| Hosting | GitHub Pages, Netlify o Vercel | Publican la carpeta `dist/` como sitio estático. |
+
+Si quieres una alternativa más ligera a React, **Preact** también usa JSX y tiene una API casi idéntica, con un tamaño mucho menor. Para un dashboard pequeño, cualquiera de las dos funciona bien; React tiene más documentación y ejemplos.
+
+## Creación del proyecto
+
+```bash
+npm create vite@latest mi-dashboard -- --template react
+cd mi-dashboard
+npm install
+npm install chart.js react-chartjs-2
+npm run build   # genera dist/
+```
+
+Para usar TypeScript, cambia la plantilla a `react-ts`. Los archivos serán `.tsx` en lugar de `.jsx`.
+
+## Estructura del proyecto
+
+```
+mi-dashboard/
+├── public/
+│   └── data/
+│       └── datos.json          → se copia a dist/data/
+├── src/
+│   ├── components/
+│   │   ├── BotonesSeccion.jsx  → botones de navegación
+│   │   ├── TarjetaResumen.jsx  → totales y métricas
+│   │   └── GraficoBarras.jsx   → gráfico de Chart.js
+│   ├── App.jsx                 → estado principal y carga del JSON
+│   ├── main.jsx                → punto de entrada
+│   └── index.css
+├── index.html
+└── dist/                       → salida del build
+```
+
+## Ejemplo de componentes
+
+Un componente de botones que recibe datos y notifica la selección mediante props:
+
+```jsx
+// src/components/BotonesSeccion.jsx
+export default function BotonesSeccion({ secciones, activa, onSeleccionar }) {
+  return (
+    <nav>
+      {secciones.map((s) => (
+        <button
+          key={s.clave}
+          className={s.clave === activa ? 'activo' : ''}
+          onClick={() => onSeleccionar(s.clave)}
+        >
+          {s.nombre}
+        </button>
+      ))}
+    </nav>
+  );
+}
+```
+
+El componente principal conecta los datos con la interfaz:
+
+```jsx
+// src/App.jsx
+import { useEffect, useState } from 'react';
+import BotonesSeccion from './components/BotonesSeccion.jsx';
+import TarjetaResumen from './components/TarjetaResumen.jsx';
+
+export default function App() {
+  const [datos, setDatos] = useState(null);
+  const [activa, setActiva] = useState('ventas');
+
+  useEffect(() => {
+    fetch('data/datos.json')
+      .then((r) => r.json())
+      .then(setDatos);
+  }, []);
+
+  if (!datos) return <p>Cargando datos...</p>;
+
+  const seccion = datos[activa];
+
+  return (
+    <main>
+      <h1>Dashboard</h1>
+      <BotonesSeccion
+        secciones={Object.entries(datos).map(([clave, s]) => ({ clave, nombre: s.nombre }))}
+        activa={activa}
+        onSeleccionar={setActiva}
+      />
+      <TarjetaResumen total={seccion.total} />
+    </main>
+  );
+}
+```
+
+Con esta estructura, al pulsar un botón se actualiza `activa`, React vuelve a renderizar los componentes afectados y el dashboard cambia sin recargar la página.
+
+## Puntos a tener en cuenta
+
+- **Los archivos `.jsx` se compilan en el build.** Lo que se publica en `dist/` es JavaScript estándar, así que el usuario final no necesita nada especial.
+- **Mantén el `fetch` del JSON en un solo lugar** (normalmente `App.jsx`) y pasa los datos a los componentes por props. Así los componentes son más fáciles de probar y reutilizar.
+- **Igual que antes, no abras `dist/index.html` con doble clic**, porque `fetch()` no funciona con `file://`. Usa `npm run preview` para probar el build.
+- **En GitHub Pages dentro de un subdirectorio**, configura `base` en `vite.config.js`.
+
+¿Quieres que prepare los componentes para los gráficos con `react-chartjs-2`, o prefieres empezar por la estructura de `datos.json` para ajustar los componentes a tus datos?
+
 
 
 

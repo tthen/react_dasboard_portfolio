@@ -521,3 +521,86 @@ Mi recomendación sería **Netlify Free con Netlify Forms o Resend**, siempre qu
 - **Anti-spam:** un campo oculto (honeypot) o Cloudflare Turnstile evitará que bots llenen tu bandeja de entrada con mensajes falsos.
 
 ¿Qué tipo de servicios ofreces y desde qué país trabajas? Con esos datos puedo sugerirte cómo estructurar el formulario para que el cliente te dé la información necesaria desde el primer contacto.
+
+## Mis servicios son en consultoria ambiental, consistente en la elaboracion de un documento reporte de modelacion de dispersion de contaminantes para proyectos de Estudios de Impacto Ambiental o para las empresas que necesitan tramitar permiso de emisiones atmosfericas. Mi pais donde ofrezco el servicio es Colombia.
+
+R/
+
+**Tu servicio encaja bien con un formulario de captación B2B, pero en Colombia el punto clave es la protección de datos personales.** Como el formulario recogerá nombres, correos y teléfonos de personas, quedas sujeto a la Ley 1581 de 2012 (habeas data) y al Decreto 1074 de 2015, que la compila. La Superintendencia de Industria y Comercio (SIC) es la autoridad que vigila su cumplimiento.
+
+### Cumplimiento de habeas data
+
+Antes de recoger datos necesitas:
+
+- **Autorización previa, expresa e informada:** un casillero que el visitante marque voluntariamente, nunca preseleccionado, con un texto como "Autorizo el tratamiento de mis datos personales conforme a la Política de Tratamiento de Datos".
+- **Política de tratamiento de datos:** documento publicado en tu web que indique quién es el responsable (tu nombre, NIT o cédula, correo y dirección), qué datos recoges, para qué los usas, cómo ejercer derechos de consulta, actualización y supresión, y el plazo de respuesta.
+- **Aviso de privacidad breve:** un enlace junto al formulario que lleve a la política completa.
+
+Si no cumples con estos requisitos, la SIC puede imponer sanciones de hasta 2.000 salarios mínimos mensuales legales vigentes. No es obligatorio inscribir tu base de datos en el Registro Nacional de Bases de Datos, porque ese requisito aplica solo a empresas con activos superiores a 100.000 UVT, pero sí debes cumplir las demás obligaciones.
+
+### Campos recomendados para el formulario
+
+Un formulario bien diseñado te ayuda a calificar al cliente antes de la primera llamada. Estos campos te dan la información técnica necesaria desde el inicio:
+
+| Campo | Para qué te sirve |
+|---|---|
+| **Nombre y cargo** | Identificar a la persona de contacto y su rol en el proyecto. |
+| **Empresa y NIT** | Verificar que es una persona jurídica y preparar la cotización. |
+| **Tipo de trámite** (desplegable) | Distinguir entre Estudio de Impacto Ambiental (EIA) y permiso de emisiones atmosféricas, que tienen alcances distintos. |
+| **Autoridad ambiental competente** | Saber si el trámite va ante ANLA, una CAR o una autoridad urbana, porque los términos de referencia cambian. |
+| **Ubicación del proyecto** (municipio y departamento) | Definir el área de estudio y la meteorología de referencia. |
+| **Tipo de fuente y contaminantes** | Estimar el alcance del modelo (por ejemplo, chimeneas, calderas, PM10, SO₂, NOx). |
+| **Plazo requerido** | Evaluar si puedes cumplir con el cronograma del cliente. |
+| **Mensaje y adjuntos** | Permitir que envíen un plano, una ficha técnica o los términos de referencia. |
+
+Ten en cuenta que los adjuntos afectan la elección de la herramienta. Formspree en su plan gratuito no admite subida de archivos, así que si quieres que los clientes envíen documentos, conviene Netlify Forms o un formulario con función serverless que reenvíe el archivo por Resend. Verifica los límites de tamaño de cada servicio antes de decidir.
+
+### Recomendaciones adicionales
+
+- **Confirma la vigencia de la normativa.** Los requisitos de modelación y los límites de calidad del aire cambian con frecuencia. Revisa la norma vigente en la web de MinAmbiente, ANLA o del IDEAM antes de publicar contenido técnico en tu portafolio.
+- **Habla de tus credenciales.** En Colombia, los clientes suelen buscar la profesión, la matrícula o tarjeta profesional, la experiencia en modelos (por ejemplo, AERMOD o CALPUFF) y los proyectos similares. Incluirlos en la web da confianza.
+- **Un mensaje de confirmación automática** debe incluir tu nombre, el tiempo de respuesta y el aviso de tratamiento de datos.
+
+Si quieres, puedo redactar el texto de la autorización de datos y un esquema de la política de tratamiento para tu sitio. Antes de publicarlos, te conviene revisarlos con un abogado especializado en protección de datos.
+
+## Si quieres, puedo redactar el texto de la autorización de datos y un esquema de la política de tratamiento para tu sitio. Acepto la oferta, quisiera una plantilla sobre autorización de datos y un esquema de la política de tratamiento de datos
+
+R/
+
+**La autorización debe ser un texto corto junto al formulario, con un enlace a la política completa de tratamiento de datos.** Los textos siguientes son plantillas que debes adaptar a tus datos reales.
+
+## Plantilla de autorización de datos
+
+Usa primero la versión corta, que va junto al botón de envío como casillero que el visitante debe marcar por su cuenta:
+
+> ☐ Autorizo de manera previa, expresa e informada a [NOMBRE O RAZÓN SOCIAL], identificado con [CC/NIT N.º XXXX], para que recolecte, use y almacene mis datos personales (nombre, correo electrónico, teléfono y empresa) con la finalidad de responder mi solicitud, elaborar cotizaciones y gestionar la relación comercial. Conozco mis derechos de acceso, actualización, rectificación y supresión, y que puedo consultar la Política de Tratamiento de Datos en [ENLACE].
+
+La versión completa va en la política de tratamiento. Para que la autorización sea válida, debe incluir de forma clara:
+
+- **Quién es el responsable del tratamiento** (nombre, identificación, correo y dirección).
+- **Qué datos se recogen** y con qué finalidad.
+- **Los derechos del titular**: conocer, actualizar, rectificar y suprimir sus datos, revocar la autorización y presentar quejas ante la SIC.
+- **Dónde consultar la política completa**, con un enlace visible.
+
+Si el formulario incluye un campo de comentarios libres, el texto debe advertir que no se deben incluir datos sensibles, como información de salud, origen étnico o datos biométricos.
+
+---
+
+## Esquema de la política de tratamiento de datos
+
+La política debe publicarse en una página accesible desde el sitio, con su fecha de entrada en vigor. Puedes organizarla en las siguientes secciones:
+
+1. **Identificación del responsable.** Nombre o razón social, NIT o cédula, correo de contacto, dirección física y teléfono.
+2. **Alcance.** Aplica a todos los datos personales que recibas a través del sitio, el formulario, el correo electrónico o las llamadas relacionadas con tus servicios.
+3. **Datos recolectados.** Nombre, cargo, correo, teléfono, empresa, NIT, ubicación del proyecto y cualquier archivo adjunto que el cliente envíe.
+4. **Finalidades.** Responder consultas, elaborar cotizaciones, gestionar contratos, enviar información de tus servicios cuando el cliente lo haya autorizado y cumplir obligaciones legales o tributarias.
+5. **Encargados del tratamiento.** Proveedores que procesan datos en tu nombre, como el servicio de alojamiento (Netlify o Vercel), el servicio de envío de correos (Resend o Formspree) y la plataforma de correo electrónico que uses. Indica que estos proveedores solo tratan los datos para cumplir las instrucciones que les das.
+6. **Transferencias internacionales.** Varios de estos proveedores tienen servidores fuera de Colombia. La Ley 1581 de 2012 (artículo 26) exige garantizar un nivel adecuado de protección, y para ello puedes apoyarte en la autorización expresa del titular y en los contratos o cláusulas de protección de datos que ofrezca cada proveedor. Revisa esta parte con un abogado.
+7. **Derechos del titular y procedimiento.** Explica cómo consultar, actualizar, rectificar, suprimir o revocar la autorización, y presentar reclamos ante la SIC si no obtiene respuesta. Indica los plazos legales: diez días hábiles para consultas y quince días hábiles para reclamos, prorrogables según la ley.
+8. **Canal de atención.** Un correo específico para temas de datos personales, por ejemplo privacidad@tudominio.com, y una dirección postal.
+9. **Conservación.** Cuánto tiempo guardas los datos después de la última interacción, y cuándo los eliminas.
+10. **Seguridad.** Medidas generales, como acceso restringido, contraseñas robustas y conexiones cifradas (HTTPS). No prometas seguridad absoluta.
+11. **Cookies y analítica.** Si usas Google Analytics u otras herramientas de medición, descríbelas y explica cómo desactivarlas.
+12. **Vigencia y cambios.** Fecha de última actualización y aviso de que la política puede cambiar, publicando cualquier modificación en el sitio.
+
+Ten en cuenta que estas plantillas son un punto de partida y no constituyen asesoría jurídica. Antes de publicarlas, conviene que un abogado especializado en protección de datos en Colombia revise la política, sobre todo las transferencias internacionales y los plazos de conservación. Si me indicas qué herramientas de analítica o correo vas a usar, puedo ajustar el esquema para incluirlas.
